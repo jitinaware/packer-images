@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -e 
+
+packer validate -var-file="vars.pkrvars.hcl" ubuntu/
+packer build -var-file="vars.pkrvars.hcl" ubuntu/

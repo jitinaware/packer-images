@@ -1,0 +1,64 @@
+
+
+---
+
+name: Packer Build/Patch All (Multi Environment)
+
+on:
+  push:
+
+jobs:
+  packer:
+    runs-on: ubuntu-latest
+    name: packer-ubuntu-multienv
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Distribute Vars 
+        run: echo centos ubuntu | xargs -n 1 cp vars.pkrvars.hcl
+
+      # validate templates
+      - name: Validate Ubuntu Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: "-syntax-only -var-file=vars.pkrvars.hcl"
+          target: .
+          working_directory: multi-env/ubuntu
+
+      - name: Validate CentOS Template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: "-syntax-only -var-file=vars.pkrvars.hcl"
+          target: .
+          working_directory: multi-env/centos
+
+      # build artifacts
+      - name: Build/Patch Ubuntu
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort -var-file=vars.pkrvars.hcl"
+          target: .
+          working_directory: multi-env/ubuntu
+        env:
+          PACKER_LOG: 1
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+      - name: Build/Patch CentOS
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          arguments: "-color=false -on-error=abort -var-file=vars.pkrvars.hcl"
+          target: .
+          working_directory: multi-env/centos
+        env:
+          PACKER_LOG: 1
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
