@@ -17,14 +17,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Distribute Vars 
-        run: echo centos ubuntu | xargs -n 1 cp multi-env/vars.pkrvars.hcl
+        run: cd multi-env/ && echo centos/ ubuntu/ | xargs -n 1 cp vars.pkrvars.hcl
 
       # validate templates
       - name: Validate Ubuntu Template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          arguments: "-syntax-only -var-file=\"vars.pkrvars.hcl\""
+          arguments: "-syntax-only -var-file=vars.pkrvars.hcl"
           target: .
           working_directory: multi-env/ubuntu
 
