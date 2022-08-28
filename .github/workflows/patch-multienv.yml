@@ -32,7 +32,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          arguments: "-syntax-only -var-file=\"vars.pkrvars.hcl\""
+          arguments: "-syntax-only -var-file=vars.pkrvars.hcl"
           target: .
           working_directory: multi-env/centos
 
@@ -41,7 +41,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort -var-file=\"vars.pkrvars.hcl\""
+          arguments: "-color=false -on-error=abort -var-file=vars.pkrvars.hcl"
           target: .
           working_directory: multi-env/ubuntu
         env:
@@ -54,7 +54,7 @@ jobs:
         uses: hashicorp/packer-github-actions@master
         with:
           command: build
-          arguments: "-color=false -on-error=abort -var-file=\"vars.pkrvars.hcl\""
+          arguments: "-color=false -on-error=abort -var-file=vars.pkrvars.hcl"
           target: .
           working_directory: multi-env/centos
         env:
