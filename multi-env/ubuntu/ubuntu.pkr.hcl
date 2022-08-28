@@ -62,7 +62,7 @@ source "azure-arm" "ubuntu-focal" {
 build {
   description = "Packer AMI Builder ${var.owner_name}"
 
-  sources = ["source.amazon-ebs.ubuntu-focal"]
+  #sources = ["source.amazon-ebs.ubuntu-focal"]
 
   source "source.azure-arm.ubuntu-focal" {
     build_resource_group_name = var.az_resource_group
