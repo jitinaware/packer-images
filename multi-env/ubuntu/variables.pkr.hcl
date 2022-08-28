@@ -14,17 +14,17 @@ variable "purpose" {
 
 variable "az_client_id" {
   type = string
-  default = env("ARM_CLIENT_ID")
+  default = env("AZ_CLIENT_ID")
 }
 
 variable "az_client_secret" {
   type = string
-  default = env("ARM_CLIENT_SECRET")
+  default = env("AZ_CLIENT_SECRET")
 }
 
 variable "az_subscription_id" {
   type = string
-  default = env("ARM_SUBSCRIPTION_ID")
+  default = env("AZ_SUBSCRIPTION_ID")
 }
 
 variable "az_resource_group" {
