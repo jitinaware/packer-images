@@ -44,9 +44,9 @@ source "azure-arm" "ubuntu-focal" {
     task = "Image deployment"
   }
 
-  client_id       = env.AZ_CLIENT_ID
-  client_secret   = env.AZ_CLIENT_SECRET
-  subscription_id = env.AZ_SUBSCRIPTION_ID
+  client_id       = env(AZ_CLIENT_ID)
+  client_secret   = env(AZ_CLIENT_SECRET)
+  subscription_id = env(AZ_SUBSCRIPTION_ID) 
 
   # Must be created beforehand
   managed_image_resource_group_name = var.az_resource_group
