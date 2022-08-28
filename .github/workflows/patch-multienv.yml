@@ -19,6 +19,20 @@ jobs:
       - name: Distribute Vars 
         run: cd multi-env/ && echo centos/ ubuntu/ | xargs -n 1 cp vars.pkrvars.hcl
 
+      - name: Packer Init - Ubuntu
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: .
+          working_directory: multi-env/ubuntu
+
+      - name: Packer Init - Ubuntu
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: init
+          target: .
+          working_directory: multi-env/centos
+
       # validate templates
       - name: Validate Ubuntu Template
         uses: hashicorp/packer-github-actions@master
